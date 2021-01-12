@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Install conpot with docker compose &#8212; conpot for isif 1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="install-conpot-with-docker-compose">
+<h1>Install conpot with docker compose<a class="headerlink" href="#install-conpot-with-docker-compose" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li><p>Install <a class="reference external" href="https://docs.docker.com/engine/install/">docker-compose</a>.</p></li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p>Clone from repository</p></li>
+</ol>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/mushorg/conpot.git
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/gitclone.jpg"><img alt="_images/gitclone.jpg" src="_images/gitclone.jpg" style="width: 600px;" /></a>
+<ol class="arabic simple" start="3">
+<li><p>Enter to directory</p></li>
+</ol>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>cd conpot
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/cdconpot.jpg"><img alt="_images/cdconpot.jpg" src="_images/cdconpot.jpg" style="width: 400px;" /></a>
+<ol class="arabic simple" start="4">
+<li><p>Edit configuration to connect HPFEEDS</p></li>
+</ol>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>nano conpot/testing.cfg
+</pre></div>
+</div>
+<p>Edit in the section below, adjust the IP, port, ident, and screet according to the configuration in HPFeeds</p>
+<a class="reference internal image-reference" href="_images/confighpfeeds.jpg"><img alt="_images/confighpfeeds.jpg" src="_images/confighpfeeds.jpg" style="width: 300px;" /></a>
+<ol class="arabic simple" start="5">
+<li><p>Build image with docker compose</p></li>
+</ol>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>docker-compose build
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/dockercomposebuild.jpg"><img alt="_images/dockercomposebuild.jpg" src="_images/dockercomposebuild.jpg" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/dockercomposebuild2.jpg"><img alt="_images/dockercomposebuild2.jpg" src="_images/dockercomposebuild2.jpg" style="width: 600px;" /></a>
+<ol class="arabic simple" start="6">
+<li><p>Permanently run as a daemon</p></li>
+</ol>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>docker-compose up -d
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/dockercomposebuild3.jpg"><img alt="_images/dockercomposebuild3.jpg" src="_images/dockercomposebuild3.jpg" style="width: 600px;" /></a>
+<ol class="arabic simple" start="7">
+<li><p>Check through the browser whether the conpot is installed successfully</p></li>
+</ol>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>docker-compose up -d
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/installsuccess.jpg"><img alt="_images/installsuccess.jpg" src="_images/installsuccess.jpg" style="width: 600px;" /></a>
+<ol class="arabic simple" start="8">
+<li><p>Add ident, screet and channel to mongo hpfeeds according to the previous configuration (assuming hpfeeds has been installed)</p></li>
+</ol>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>python /opt/hpfeeds/broker/add_user.py isifconpot password1234 &quot;conpot.events&quot; &quot;&quot;
+</pre></div>
+</div>
+<ol class="arabic simple" start="9">
+<li><p>Check whether ident, screet and channel have entered Mongo HPfeeds</p></li>
+</ol>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>sudo mongo
+</pre></div>
+</div>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>show databases
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/checkmongo.jpg"><img alt="_images/checkmongo.jpg" src="_images/checkmongo.jpg" style="width: 300px;" /></a>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">conpot for isif</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, zaenal.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
